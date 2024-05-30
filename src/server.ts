@@ -41,6 +41,20 @@ app.get('/movies', async (_, res) => {
     res.status(201).send();
    });
 
+   app.put('/movies/:id', async (req, res) => {
+    const id = Number(req.params.id);
+ 
+    const movie = await prisma.movie.update({ 
+    where: { 
+       id
+     }, 
+    data : {
+       release_date: new Date(req.body.release_date) 
+     } });
+     res.status(200).send()
+ });
+
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 })
