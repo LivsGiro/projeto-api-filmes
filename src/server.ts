@@ -74,7 +74,8 @@ app.get('/movies', async (_, res) => {
          : undefined;
     
          await prisma.movie.update({ where: { id }, data });
-      }catch(error){
+      }
+      catch(error){
        return res.status(500).send({ message: "Falha ao atualizar o registro" });
       }
     

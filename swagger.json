@@ -8,6 +8,7 @@
     "paths": {
         "/movies": {
             "get": {
+                "tags": [ "Movies" ],
                 "summary": "Obter todos os filmes",
                 "responses":{
                     "200": {  
