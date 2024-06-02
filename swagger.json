@@ -90,7 +90,42 @@
                     },
                     "404": {
                         "description": "Filme não encontrado"
-                    },
+                    }
+                }
+                },
+                    "movies/{genreName}": {
+                        "get": {
+                            "tags": [
+                                "Movie"
+                            ],
+                            "summary": "Obter todos os filmes por genero",
+                            "parameters": [
+                                {
+                                    "name": "genreName",
+                                    "in": "path",
+                                    "required": true,
+                                    "description": "Nome do genero",
+                                    "schema": {
+                                        "type": "string"
+                                    }
+                                }
+                            ],
+                            "responses": {
+                                "200": {
+                                    "description": "OK",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "string",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/Movie"
+                            }}}}}},
+                            "500": {
+                                "description": "Falha ao atualizar o registro"
+                            }},
+
+
+
                     "components": {
                         "schemas": {
                             "Movie": {
@@ -181,4 +216,4 @@
             }
         }
     }
-}
+
