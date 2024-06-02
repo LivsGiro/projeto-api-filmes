@@ -92,122 +92,124 @@
                         "description": "Filme não encontrado"
                     }
                 }
-                },
-                    "movies/{genreName}": {
-                        "get": {
-                            "tags": [
-                                "Movie"
-                            ],
-                            "summary": "Obter todos os filmes por genero",
-                            "parameters": [
-                                {
-                                    "name": "genreName",
-                                    "in": "path",
-                                    "required": true,
-                                    "description": "Nome do genero",
+            },
+            "movies/{genderName}": {
+                "get": {
+                    "tags": [
+                        "Movie"
+                    ],
+                    "summary": "Obter todos os filmes por genero",
+                    "parameters": [
+                        {
+                            "name": "genderName",
+                            "in": "path",
+                            "required": true,
+                            "description": "Nome do genero",
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "content": {
+                                "application/json": {
                                     "schema": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Movie"
+                                        },
+                                        "500": {
+                                            "description": "Falha ao filtrar filmes por genero"
+                                        }
                                     }
                                 }
+                            }
+                        }
+                    }
+                },
+                "components": {
+                    "schemas": {
+                        "Movie": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "description": "Nome do filme"
+                                },
+                                "genre_id": {
+                                    "type": "integer",
+                                    "description": "Genero do filme"
+                                },
+                                "genres": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "description": "Id do genero"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Nome do genero"
+                                        }
+                                    }
+                                },
+                                "language_id": {
+                                    "type": "integer",
+                                    "description": "Id da linguagem"
+                                },
+                                "languages": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "description": "Id do genero"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Nome do genero"
+                                        }
+                                    }
+                                },
+                                "oscar_count": {
+                                    "type": "integer",
+                                    "description": "Quantidade de oscars recebidos"
+                                }
+                            }
+                        },
+                        "MovieInput": {
+                            "type": "object",
+                            "required": [
+                                "title",
+                                "genre_id",
+                                "language_id",
+                                "oscar_count",
+                                "release_date"
                             ],
-                            "responses": {
-                                "200": {
-                                    "description": "OK",
-                                    "content": {
-                                        "application/json": {
-                                            "schema": {
-                                                "type": "string",
-                                                "items": {
-                                                    "$ref": "#/components/schemas/Movie"
-                            }}}}}},
-                            "500": {
-                                "description": "Falha ao atualizar o registro"
-                            }},
-
-
-
-                    "components": {
-                        "schemas": {
-                            "Movie": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "Nome do filme"
-                                    },
-                                    "genre_id": {
-                                        "type": "integer",
-                                        "description": "Genero do filme"
-                                    },
-                                    "genres": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "integer",
-                                                "description": "Id do genero"
-                                            },
-                                            "name": {
-                                                "type": "string",
-                                                "description": "Nome do genero"
-                                            }
-                                        }
-                                    },
-                                    "language_id": {
-                                        "type": "integer",
-                                        "description": "Id da linguagem"
-                                    },
-                                    "languages": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "integer",
-                                                "description": "Id do genero"
-                                            },
-                                            "name": {
-                                                "type": "string",
-                                                "description": "Nome do genero"
-                                            }
-                                        }
-                                    },
-                                    "oscar_count": {
-                                        "type": "integer",
-                                        "description": "Quantidade de oscars recebidos"
-                                    }
-                                }
-                            },
-                            "MovieInput": {
-                                "type": "object",
-                                "required": [
-                                    "title",
-                                    "genre_id",
-                                    "language_id",
-                                    "oscar_count",
-                                    "release_date"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "description": "Titulo do filme"
-                                    },
-                                    "genre_id": {
-                                        "type": "integer",
-                                        "description": "Id do Genero do filme"
-                                    },
-                                    "language_id": {
-                                        "type": "integer",
-                                        "description": "Id da linguagem"
-                                    },
-                                    "oscar_count": {
-                                        "type": "integer",
-                                        "description": "Quantidade de oscars recebidos"
-                                    },
-                                    "release_date": {
-                                        "type": "string",
-                                        "description": "Data de lancamento"
-                                    }
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "description": "Titulo do filme"
+                                },
+                                "genre_id": {
+                                    "type": "integer",
+                                    "description": "Id do Genero do filme"
+                                },
+                                "language_id": {
+                                    "type": "integer",
+                                    "description": "Id da linguagem"
+                                },
+                                "oscar_count": {
+                                    "type": "integer",
+                                    "description": "Quantidade de oscars recebidos"
+                                },
+                                "release_date": {
+                                    "type": "string",
+                                    "description": "Data de lancamento"
                                 }
                             }
                         }
@@ -216,4 +218,4 @@
             }
         }
     }
-
+}
